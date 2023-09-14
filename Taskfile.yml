@@ -8,6 +8,8 @@ vars:
   SDINC_TF_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
   SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.azure:/root/.azure -v $(pwd):$(pwd) -w $(pwd)"
+  EPOCH:
+    sh: date +%s
 tasks:
   default:
     cmds:

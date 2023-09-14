@@ -3,7 +3,7 @@
 ## Dependancies
 
 * docker: one way to install is with [docker desktop](https://www.docker.com/products/docker-desktop/) 
-* task: one way to install is with a [curl script](https://taskfile.dev/installation/#get-the-binary)
+* task: one way to install is with a ```sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin``` more details at [reference](https://taskfile.dev/installation/#get-the-binary)
 
 
 ## Help
