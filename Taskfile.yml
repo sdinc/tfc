@@ -5,24 +5,30 @@ version: '3'
 vars:
   GREETING: Hello, Welcome to SDinc ( Specialty Diagnostics Incorporated )
   SDINC_TF_VERSION: "hashicorp/terraform:1.5.2"
-  SDINC_TF_DOCKER_OPTIONS: "-i -t -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_TF_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
   SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.azure:/root/.azure -v $(pwd):$(pwd) -w $(pwd)"
 tasks:
   default:
     cmds:
       - echo "{{.GREETING}}"
+      - task --list
+      - date
     silent: true
   tf-init:
+    desc: "terraform init via docker backend terraform cloud"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} init"
   tf-login:
+    desc: "terraform login via docker backend terraform cloud"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} login"
   tf-plan:
+    desc: "terraform plan via docker backend terraform cloud"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} plan"
   tf-apply:
+    desc: "terraform apply via docker backend terraform cloud"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply"
   az-cli:
