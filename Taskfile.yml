@@ -8,6 +8,10 @@ vars:
   SDINC_TF_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
   SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.azure:/root/.azure -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_AWS_VERSION: "public.ecr.aws/aws-cli/aws-cli:2.13.18"
+  SDINC_AWS_LATEST: "public.ecr.aws/aws-cli/aws-cli:latest"
+  SDINC_AWS_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_LATEST: "sdinc:latest"
   EPOCH:
     sh: date +%s
 tasks:
@@ -15,7 +19,7 @@ tasks:
     cmds:
       - echo "{{.GREETING}}"
       - task --list
-      - date
+      - date -u
     silent: true
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
@@ -33,6 +37,18 @@ tasks:
     desc: "terraform apply via docker backend terraform cloud"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply"
+  aws-who:
+    desc: "aws sts get-caller-identity"
+    cmds:
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} sts get-caller-identity"
+  aws-build:
+    desc: "build a aws container with bash shell"
+    cmds:
+      - "docker build -t {{.SDINC_LATEST}} ."
+  aws-cli:
+    desc: "aws sts get-caller-identity"
+    cmds:
+      - 'docker run --entrypoint="/bin/bash" {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
   az-cli:
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "

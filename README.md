@@ -12,10 +12,13 @@
 brody@brodys-MacBook-Pro tfc % task
 Hello, Welcome to SDinc ( Specialty Diagnostics Incorporated )
 task: Available tasks for this project:
-* tf-apply:       terraform apply via docker backend terraform cloud
-* tf-init:        terraform init via docker backend terraform cloud
-* tf-login:       terraform login via docker backend terraform cloud
-* tf-plan:        terraform plan via docker backend terraform cloud
-Thu Sep 14 16:08:06 PDT 2023
-brody@brodys-MacBook-Pro tfc % 
+* aws-build:       build a aws container with bash shell
+* aws-cli:         aws sts get-caller-identity
+* aws-who:         aws sts get-caller-identity
+* tf-apply:        terraform apply via docker backend terraform cloud
+* tf-init:         terraform init via docker backend terraform cloud
+* tf-login:        terraform login via docker backend terraform cloud
+* tf-plan:         terraform plan via docker backend terraform cloud
+Fri Sep 15 16:21:53 UTC 2023
+brody@brodys-MacBook-Pro tfc %
 ```
