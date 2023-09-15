@@ -10,3 +10,6 @@ RUN yum install bash -y
 #might change this later but for now leave it as in the original image
 WORKDIR /aws
 ENTRYPOINT ["/usr/local/bin/aws"]
+
+#checkov:skip=CKV_DOCKER_2:No need for healthcheck as development container used to build and not run stuff
+#checkov:skip=CKV_DOCKER_3:No need for user as development container used to build and not run stuff

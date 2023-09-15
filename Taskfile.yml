@@ -49,6 +49,10 @@ tasks:
     desc: "aws sts get-caller-identity"
     cmds:
       - 'docker run --entrypoint="/bin/bash" {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
+  checkov:
+    desc: "run checkov via docker"
+    cmds:
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}}  bridgecrew/checkov --directory $(pwd) "
   az-cli:
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "
