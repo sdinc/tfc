@@ -52,7 +52,7 @@ tasks:
   checkov:
     desc: "run checkov via docker"
     cmds:
-      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}}  bridgecrew/checkov --directory $(pwd) "
+      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}}  bridgecrew/checkov --directory $(pwd) "
   az-cli:
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "

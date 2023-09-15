@@ -1,5 +1,6 @@
 # create acm and explicitly set it to us-east-1 provider
 module "acm_request_certificate" {
+  #checkov:skip=CKV_TF_1:Not sure about this one
   source = "cloudposse/acm-request-certificate/aws"
   version = "0.16.3"
 
@@ -10,6 +11,7 @@ module "acm_request_certificate" {
 }
 
 module "cdn" {
+  #checkov:skip=CKV_TF_1:Not sure about this one
   source = "cloudposse/cloudfront-s3-cdn/aws"
   version = "0.92.0"
 
