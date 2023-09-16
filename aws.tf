@@ -21,7 +21,6 @@ module "cdn" {
   name              = "web"
   aliases           = ["www.sfefoil.com"]
   dns_alias_enabled = true
-  parent_zone_name  = "sfefoil.com"
   parent_zone_id = "Z09269892PE8XEABM3L02"
   acm_certificate_arn = module.acm_request_certificate.arn
 
