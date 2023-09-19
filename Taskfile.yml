@@ -12,6 +12,8 @@ vars:
   SDINC_AWS_LATEST: "public.ecr.aws/aws-cli/aws-cli:latest"
   SDINC_AWS_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_LATEST: "sdinc:latest"
+  SDINC_BAZEL_LATEST: "gcr.io/bazel-public/bazel:latest"
+  SDINC_BAZEL_VERSION: "gcr.io/bazel-public/bazel:6.3.2"
   EPOCH:
     sh: date +%s
 tasks:

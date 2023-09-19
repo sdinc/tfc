@@ -8,4 +8,14 @@ Also took a detour to look at https://github.com/GoogleCloudPlatform/gke-terrafo
 
 Once again interesting read but not that fun. 
 
-Going looking for a general bazel project example where I can take what I have done with taskfile.yaml and put this into bazel. 
+TODO: Going looking for a general bazel project example where I can take what I have done with taskfile.yaml and put this into bazel. 
+
+Reading about bazel and docker, https://earthly.dev/blog/push-docker-image-bazel/
+
+
+## Install bazel
+
+Install the [binary](https://github.com/bazelbuild/bazelisk/releases) and put it on your path something like ```/usr/local/bin/``` 
+[Reference](https://bazel.build/install)
+
+
