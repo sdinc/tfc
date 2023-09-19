@@ -86,7 +86,13 @@ tasks:
     desc: "MBP bazel build from container"
     cmds:
       - 'docker run -e USER="$(id -u)" -u="$(id -u)" {{.SDINC_BAZEL_DOCKER_OPTIONS}} {{.SDINC_BAZEL_VERSION}} --output_user_root=$(pwd)/bazel_files/workspace1/build_output build '
-  bazel-build:
-    desc: "run bazel build from container"
+  bazel-working:
+    dir: bazel_files/workspace3
+    desc: "bazel run :basic_alpine from workspace3 directory"
     cmds:
-      - "SDINC_BAZEL_LATEST"
+      - "bazel run :basic_alpine"
+  bazel-broken:
+    dir: bazel_files/workspace1
+    desc: "bazel run :basic_alpine from workspace3 directory"
+    cmds:
+      - "bazel run :sdinc_aws"
