@@ -36,10 +36,11 @@ terraform.rc
 .DS_Store
 
 # Bazel generated files
-
 bazel-bin
 bazel-out
 bazel-testlogs
 build_output
 bazel-workspace*
 
+#checkov
+.external_modules

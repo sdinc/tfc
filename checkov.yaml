@@ -1,0 +1,13 @@
+block-list-secret-scan: []
+branch: master
+directory:
+- /Users/brody/workspace/github/sdinc/tfc
+download-external-modules: cloudposse/acm-request-certificate/aws:0.16.3,cloudposse/cloudfront-s3-cdn/aws:0.92.0,cloudposse/label/null:0.25.0,cloudposse/route53-cluster-zone/aws:0.12.0,cloudposse/s3-log-storage/aws:1.4.2,cloudposse/route53-alias/aws:0.13.0,cloudposse/label/null:0.24.1,cloudposse/s3-bucket/aws:3.1.2,cloudposse/iam-role/aws:0.16.0,cloudposse/kms-key/aws:0.7.0,cloudposse/s3-bucket/aws:0.22.0,cloudposse/iam-system-user/aws:1.0.0,cloudposse/ssm-parameter-store/aws:0.10.0
+evaluate-variables: true
+external-modules-download-path: .external_modules
+framework:
+- all
+mask: []
+secrets-history-timeout: 12h
+secrets-scan-file-type: []
+summary-position: bottom

@@ -28,6 +28,8 @@ module "cdn" {
 }
 
 resource "aws_ecr_repository" "sdinc-aws" {
+  #checkov:skip=CKV_AWS_163:Do not want to pay for compute of container image scanning
+  #checkov:skip=CKV_AWS_136:simple encryption do not want to pay for kms yet
   name                 = "sdinc-aws"
   image_tag_mutability = "IMMUTABLE"
 
@@ -41,6 +43,8 @@ resource "aws_ecr_repository" "sdinc-aws" {
 }
 
 resource "aws_ecr_repository" "sdinc-py" {
+  #checkov:skip=CKV_AWS_163:Do not want to pay for compute of container image scanning
+  #checkov:skip=CKV_AWS_136:simple encryption do not want to pay for kms yet
   name                 = "sdinc-py"
   image_tag_mutability = "IMMUTABLE"
 
