@@ -11,7 +11,7 @@ can be added to a base image using its parameters
 
 container_image(
     name = "sdinc_aws",
-    base = "@aws_base//image",
+    base = "@aws_base//image"
 )
 
 # container_push pushes a local image to a registry of your\
@@ -23,5 +23,5 @@ container_push(
     image = ":sdinc_aws",
     registry = "616843412874.dkr.ecr.us-east-1.amazonaws.com",
     repository = "sdinc-aws",
-    tag = "0.0.1",
+    tag = "0.0.1"
 )

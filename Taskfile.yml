@@ -14,6 +14,7 @@ vars:
   SDINC_LATEST: "sdinc:latest"
   SDINC_BAZEL_LATEST: "gcr.io/bazel-public/bazel:latest"
   SDINC_BAZEL_VERSION: "gcr.io/bazel-public/bazel:6.3.2"
+  SDINC_BAZEL_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v $(pwd):$(pwd) -w $(pwd)/bazel_files/workspace1"
   SDINC_ECR: "616843412874.dkr.ecr.us-east-1.amazonaws.com"
   EPOCH:
     sh: date +%s
@@ -84,7 +85,7 @@ tasks:
   mac-bb:
     desc: "MBP bazel build from container"
     cmds:
-      - 'docker run -e USER="$(id -u)" -u="$(id -u)" {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_BAZEL_VERSION}} --output_user_root=$(pwd)/build_output build'
+      - 'docker run -e USER="$(id -u)" -u="$(id -u)" {{.SDINC_BAZEL_DOCKER_OPTIONS}} {{.SDINC_BAZEL_VERSION}} --output_user_root=$(pwd)/bazel_files/workspace1/build_output build '
   bazel-build:
     desc: "run bazel build from container"
     cmds:
