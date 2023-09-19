@@ -14,6 +14,7 @@ vars:
   SDINC_LATEST: "sdinc:latest"
   SDINC_BAZEL_LATEST: "gcr.io/bazel-public/bazel:latest"
   SDINC_BAZEL_VERSION: "gcr.io/bazel-public/bazel:6.3.2"
+  SDINC_ECR: "616843412874.dkr.ecr.us-east-1.amazonaws.com"
   EPOCH:
     sh: date +%s
 tasks:
@@ -39,6 +40,10 @@ tasks:
     desc: "terraform apply via docker backend terraform cloud"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply --auto-approve"
+  aws-auth-ecr:
+    desc: "authenticate to aws ecr repo's"
+    cmds:
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin {{.SDINC_ECR}}"
   aws-who:
     desc: "aws sts get-caller-identity"
     cmds:
@@ -76,3 +81,11 @@ tasks:
   az-cli:
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "
+  mac-bb:
+    desc: "MBP bazel build from container"
+    cmds:
+      - 'docker run -e USER="$(id -u)" -u="$(id -u)" {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_BAZEL_VERSION}} --output_user_root=$(pwd)/build_output build'
+  bazel-build:
+    desc: "run bazel build from container"
+    cmds:
+      - "SDINC_BAZEL_LATEST"

@@ -27,6 +27,32 @@ module "cdn" {
   depends_on = [module.acm_request_certificate]
 }
 
+resource "aws_ecr_repository" "sdinc-aws" {
+  name                 = "sdinc-aws"
+  image_tag_mutability = "IMMUTABLE"
+
+  encryption_configuration {
+    encryption_type = "AES256"
+  }
+
+  image_scanning_configuration {
+    scan_on_push = false
+  }
+}
+
+resource "aws_ecr_repository" "sdinc-py" {
+  name                 = "sdinc-py"
+  image_tag_mutability = "IMMUTABLE"
+
+  encryption_configuration {
+    encryption_type = "AES256"
+  }
+
+  image_scanning_configuration {
+    scan_on_push = false
+  }
+}
+
 module "cdn_sd" {
   #checkov:skip=CKV_TF_1:Not sure about this one
   source = "cloudposse/cloudfront-s3-cdn/aws"
