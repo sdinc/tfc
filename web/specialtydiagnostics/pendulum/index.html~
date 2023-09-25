@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+
+<BODY>
+<p>
+&nbsp;
+</p>
+<CENTER>
+<H1>Physical Pendulum Simulation</H1>
+<p>&nbsp;</p>
+</CENTER>
+<H2>Contents: </H2>
+
+<DL>
+<DD>
+<A HREF="#introduction">Purpose</A>
+<DD>
+<A HREF="#build">Building the program</A>
+<DD>
+<A HREF="#running">Running the GUI</A>
+<DD>
+<A HREF="#Problems">Problems</A>
+</DL>
+
+<H2><A NAME="introduction">Purpose</A></H2>
+
+<p>To use actual physics equations to simulate a single swinging pendulum and a
+chain linked pendulum.&nbsp; I obtained the physics equations from, <a href="http://www.myphysicslab.com/pendulum1.html">single
+pendulum</a>, <a href="http://www.myphysicslab.com/dbl_pendulum.html">double
+pendulum</a>, web sights.&nbsp; I used the <a href="http://www.myphysicslab.com/runge_kutta.html">Runge-Kutta
+Algorithm</a> to get an numerical approximation for the motion of the
+pendulum.&nbsp;&nbsp;</p>
+
+<H2><A NAME="build">Building the program</A></H2>
+<p>I developed the program in MS visual C++ 6.0 programming environment, and a
+unix programming environment.&nbsp;
+Before you build the program in unix or in MS visual C++ 6.0 , you must open up the gui.fl using fluid and use
+the write command located under the file menu. This will produce gui.cxx and
+gui.h.&nbsp;</p>
+<p><img border="0" src="Readme1.jpg" width="671" height="507">&nbsp;</p>
+<p>Now that you have gui.cxx and gui.h you can build the project from the
+command line under unix.&nbsp; Assuming that the proper complier, fltk and
+openGL libraries are installed, you can simple type make at the command prompt
+in the directory the program files are located in. This will create
+&quot;prog4&quot;, an executible program.&nbsp; In windows you have to load the
+project file then type f7 or click on the build button.</p>
+<p>&nbsp;</p>
+<p><img border="0" src="Readme2.jpg" width="849" height="639"></p>
+<p>&nbsp;</p>
+<p>When the project is built it creates an executeible file that can be run by
+typing [control f5]. This will bring up the program.<a href="http://www.nas.nasa.gov/Research/Datasets/Hung/index.shtml"> </p>
+<p>&nbsp;
+</p>
+<H2></a><A NAME="running">Running the GUI</A></H2>
+<P>
+You should now see something similar to this.
+<P>
+<img border="0" src="Readme3.jpg" width="1024" height="768">&nbsp;<P>You have
+the choice to change via slider several&nbsp; different parameters about the
+pendulum.&nbsp; The gravity, length, mass are to be changed as the animation is
+running and the angle is to be changed while the animation is not running.&nbsp;
+The button on the right called run, starts and stops the animation.&nbsp; The
+camera x y z sliders allow the user to change the view.&nbsp; You can switch
+between one ball and two ball pendulums by clicking on the buttons.&nbsp;&nbsp;
+<P>
+<A NAME="Problems"><b><font size="5">Problems</font></b></A>
+<P>&nbsp;&nbsp;&nbsp; I had serious problems calculating the two ball
+pendulum.&nbsp; From some unknown error the second ball appears to be gaining
+energy and transferring that energy to the first ball.&nbsp; Thus after a while
+the system gains to much acceleration, in ball two causing an explosion in the
+movement which is quite chaotic.&nbsp; I thought that the most likely sources
+for the error in calculation is the transfer from the&nbsp;&nbsp; <a href="http://www.myphysicslab.com/dbl_pendulum.html">double
+pendulum</a> web sight equation into my implementation. After double checking my
+work I was still unable to find a problem.&nbsp; I checked the implicit casting
+from double to floats and that all seemed to be ok.&nbsp; After several hours of
+checking and double checking my work I moved on and left the problem unsolved.  
+<P>
+&nbsp;
+<P>
+&nbsp;
+<P>
+&nbsp;
+</BODY>
+</HTML>
+

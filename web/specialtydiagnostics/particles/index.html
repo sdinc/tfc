@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+
+<HEAD>
+
+
+
+<BODY>
+
+<p>
+
+&nbsp;
+
+</p>
+
+<CENTER>
+
+<H1>Particle System</H1>
+
+<p>&nbsp;</p>
+
+</CENTER>
+
+<H2>Contents: </H2>
+
+
+
+<DL>
+
+<DD>
+
+<A HREF="#introduction">Purpose</A>
+
+<DD>
+
+<A HREF="#build">Building the program</A>
+
+<DD>
+
+<A HREF="#running">Running the GUI</A>
+
+<DD>
+
+<A HREF="#Problems">Problems</A>
+
+</DL>
+
+
+
+<H2><A NAME="introduction">Purpose</A></H2>
+
+
+
+<p>To use actual physics equations to simulate a single swinging pendulum and a
+particle system spawning from the end of the ball. I used the <a href="http://www.myphysicslab.com/runge_kutta.html">Runge-Kutta
+
+Algorithm</a> to get an numerical approximation for the motion of the pendulum
+and the particle.&nbsp;&nbsp;</p>
+
+
+
+<H2><A NAME="build">Building the program</A></H2>
+
+<p>I developed the program in MS visual C++ 6.0 programming environment, and a
+
+unix programming environment.&nbsp;
+
+Before you build the program in unix or in MS visual C++ 6.0 , you must open up the gui.fl using fluid and use
+
+the write command located under the file menu. This will produce gui.cxx and
+gui.h.&nbsp; Now that you have gui.cxx and gui.h you can build the project from the
+
+command line under unix.&nbsp; Assuming that the proper complier, fltk and
+
+openGL libraries are installed, you can simple type make at the command prompt
+
+in the directory the program files are located in. This will create
+
+&quot;prog5&quot;, an executible program.&nbsp; In windows you have to load the
+
+project file then type f7 or click on the build button. When the project is built it creates an executeible file that can be run by
+
+typing [control f5], or clicking the build button. This will bring up the program.<a href="http://www.nas.nasa.gov/Research/Datasets/Hung/index.shtml"> </p>
+
+<H2></a><A NAME="running">Running the GUI</A></H2>
+
+<P>
+
+You should now see something similar to this.&nbsp;<img border="0" src="screen_shot.jpg" width="1024" height="768"><P>Initially
+you might not see anything anything, which can be solved by moving the zoom
+slider around.&nbsp; To start the pendulum swinging click on the run
+toggle.&nbsp; To start the particles set the slider, number of particles to some
+value.&nbsp; You will now see the particles.&nbsp; Most of the sliders are self explanatory.
+The direction sliders changes the value of a number that is used to set the
+initial velocity and direction of the particles. In use with the Velocity slider
+the direction slider can change the size of the explosion of particles.&nbsp; I
+also created two modes that the system can be run in.&nbsp; Bounce mode makes
+the particles bounce off the ground plane, while reseed mode make the particles
+start over the second the hit the ground plane.&nbsp; You can also change the
+initial color and the end color, camera angles, and the speed of the integration,
+and various particles system parameters.&nbsp;
+
+<P>
+
+<A NAME="Problems"><b><font size="5">Problems</font></b></A>
+
+<P>&nbsp;&nbsp;&nbsp; I am not sure why but the bounce only bounces once and
+then continues through the plane.&nbsp; I did not want to spend time trying to
+figure out the problem, because the final project is worth much more than this
+project.&nbsp; In the windows system the initial camera setting are bad. But
+under the unix systems the camera settings are fine.  
+
+<P>
+
+&nbsp;
+
+<P>
+PreCompiled version of the application Win32
+<a href="particle.exe">Particle&nbsp;</a
+&nbsp;
+
+<P>
+
+&nbsp;
+
+</BODY>
+
+</HTML>
+
+
+

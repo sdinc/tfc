@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+
+<BODY>
+<p>
+&nbsp;
+</p>
+<CENTER>
+<H1>Sail Boat Simulation</H1>
+<p>&nbsp;</p>
+</CENTER>
+<H2>Contents: </H2>
+
+<DL>
+<DD>
+<A HREF="#introduction">Purpose</A>
+<DD>
+<A HREF="#build">Building the program</A>
+<DD>
+<A HREF="#running">Running the GUI</A>
+<DD>
+<A HREF="#Problems">Problems</A>
+</DL>
+
+<H2><A NAME="introduction">Purpose</A></H2>
+
+<p>I tried to use actual physics for sailing but the math was quite
+difficult. I simplified the equations in order to implement them.&nbsp; I used
+euler integration for the movement of the boat and <a href="http://www.myphysicslab.com/runge_kutta.html">Runge-Kutta&nbsp;</a>
+for the integration of the spray.&nbsp; I modeled the boat my self and then
+using an import-export program called milk shape exported it into open GL.&nbsp;
+Milk shape exported my model as a list of vertices and normals which I could
+then traverse through and draw my objects.&nbsp; A few of my goals for the
+project were, to have a realistic sailing simulation.&nbsp; Represent the ocean
+with waves, and allow the user to control the navigation of the
+boat.&nbsp;&nbsp;&nbsp;</p>
+
+<H2><A NAME="build">Building the program</A></H2>
+<p>I developed the program in MS visual C++ 6.0 programming environment, and a
+unix programming environment.&nbsp;
+Before you build the program in unix or in MS visual C++ 6.0 , you must open up the gui.fl using fluid and use
+the write command located under the file menu. This will produce gui.cxx and
+gui.h.&nbsp;Now that you have gui.cxx and gui.h you can build the project from the
+command line under unix.&nbsp; Assuming that the proper complier, fltk and
+openGL libraries are installed, you can simple type make at the command prompt
+in the directory the program files are located in. This will create
+&quot;sail_boat&quot;, an executible program.&nbsp; In windows you have to load the
+project file then type f7 or click on the build button.&nbsp; When the project is built it creates an executeible file that can be run by
+typing [control f5]. This will bring up the program.<a href="http://www.nas.nasa.gov/Research/Datasets/Hung/index.shtml"> </p>
+<H2></a><A NAME="running">Running the GUI</A></H2>
+<P>
+You should now see something similar to this.
+<P>
+<img border="0" src="Readme1.jpg" width="663" height="634"><P>You have
+the choice to change via slider several&nbsp; different parameters from the
+scene.&nbsp; The wave height and length change the sea as you would think. The
+height makes swells higher, while the length makes the waves longer.&nbsp; You
+are able to change the magnitude of the wind, which will in turn cause the boat
+to heel and sail faster.&nbsp; The easiest navigation is with the preset points
+of sail, reach, weather and down wind. You may also use the tack button to
+change the direction of the boat.&nbsp; For realistic navigation you can use the
+rudder and the sheet, which affect the boat direction and the trim on the
+sail.&nbsp;&nbsp; The run toggle allows you to start and stop the
+animation.&nbsp; The restart button re-centers the boat. The orange triangle
+that appears above the boat is a wind glyph depicting both wind direction and
+magnitude.&nbsp;<P>Below are a few screen shots that were my favorite.<P><img border="0" src="Readme2.jpg" width="663" height="634"><P><img border="0" src="Readme3.jpg" width="663" height="634">&nbsp;&nbsp;&nbsp;<P> <P> <a href="sample.mov">movie
+link</a>
+<P>
+<A NAME="Problems"><b><font size="5">Problems</font></b></A>
+<P>&nbsp;&nbsp;&nbsp; I had several problems with the physics of sailing.&nbsp;
+I ended up coming up with my own physics&nbsp; for the simulation
+purposes.&nbsp; The basic variables that I used for simulating sailing
+were.&nbsp; The direction of the boat, simply determined by the rudder
+position.&nbsp; The amount the sails were trimmed.&nbsp; The force the wind was
+putting on the boat, both causing the boat to tilt and causing the boat to
+move.&nbsp; The sway of the waves causing to boat to tilt.&nbsp; These variables
+are calculated in my b_position function.&nbsp;&nbsp; I also had trouble generating water.&nbsp;
+I ended up using a sin function to
+create the sway and using a little bit of randomness to change the color and the
+normals.&nbsp; The end effect is not exactly water but for my purposes it is
+pretty good.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+<P>
+PreCompiled version of the application Win32
+<a href="sail_boat_sim.exe">Sail_Boat_sim&nbsp;</a>
+
+&nbsp;
+<P>
+&nbsp;
+<P>
+&nbsp;
+</BODY>
+</HTML>
+

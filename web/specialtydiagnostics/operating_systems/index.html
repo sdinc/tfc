@@ -1,0 +1,53 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+</head>
+<PRE>Jason Brody-Stewart
+(spudnic)
+cmps111
+project 1</PRE>
+<PRE>To run the program type {dlxsim -x os.dlx.obj -a -S0} the program runs in 
+default scheduling, round robin. To run the program in lottery scheduling 
+change the -S0 to -S1. To run the program in priority based scheduling 
+change the -S0 to -S2. The program is set up to run in the following way. 
+It prints out the type of scheduling and all the current processes in the 
+runQueue, and the information that goes with those process.  This way you 
+can tell what the output should look like. For example when I run the 
+program in priority scheduling mode I can see the priority of all the 
+process and from that I can tell what process should run.  </PRE>
+<PRE>I made a file called {test} which has an example of what I typed and what 
+the program outputted. I am pretty sure that my program works from this 
+printed out put.  </PRE>
+<PRE>The way the program is setup it make ten process, it then calls a setting 
+method and that sets the number of tickets and priority of the process 
+using a random(); that way I get good variance in tickets and in priority.</PRE>
+<PRE>To test my program on other process you can just comment out the code on 
+line 882 which is a for loop that makes ten process, and also comment out 
+the call to sets() which sets the priority and tickets of all the process 
+in the runQueue.</PRE>
+<PRE>Problems
+I tried to make a option -m{#} which would create {#} that many process 
+but when ever I ran the program with the option it did the following
+ </PRE>
+<PRE>BS(:)&gt;dlxsim -x os.dlx.obj -a -S0 -m2
+Stack=0x1fffe0, pc starting at 0x86d0
+Got 2 arguments.
+Available memory: 0x10110 -&gt; 0x200000.
+Argument count is 2.
+Argument 0 is -S0.
+Argument 1 is -m2.
+round robin
+FATAL: couldn't allocate memory - no free pages!
+Exiting at program request.
+Instructions executed: 265577
+Time simulated: 0.266 secs
+Real time elapsed: 0.229 secs
+Execution rate: 1.16M simulated instructions per real second.
+ </PRE>
+<PRE>Also it you have lots of process to run lets say 20.  It seem to output 
+information in packets. So if you are running in round robin, it out puts 
+the process in the order that they were created but it prints then in 
+clumps of the list.  So it takes a while for the out put to come up.  This 
+is most likely dew to the fact the I search through the queue 
+many times in different place of my code, so the longer the queue the 
+longer the it takes to search, hence the display of clumps that seems to 
+occur.  </PRE>

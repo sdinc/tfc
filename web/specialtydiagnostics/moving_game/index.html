@@ -1,0 +1,43 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+</head>
+<PRE><b><u>Jason Brody-Stewart
+Programming assignment 2</u></b></PRE>
+<PRE><b><u>Purpose</u></b>-To write a game that requires you to draw objects in a 3d world.</PRE>
+<PRE><b><u>Main files</u></b>-disp_utils.c, formd.c, Makefile, maze.c, prog2.c, prog2_gui.c, prog2_gui.fd, pro2_gui_cb.c, xforms_utils.c
+ </PRE>
+<PRE>	disp_utils.c-Makes all the openGL calls does the actual drawing.
+	</PRE>
+<PRE>	formd.c-File used by fdesign to create gui.
+	</PRE>
+<PRE>	Makefile-File used to compile the program. Must be in the following syntax [make sun_xforms].
+	</PRE>
+<PRE>	maze.c-File were all world manipulations are done.  This is where I wrote the procedures that
+	the buttons called in order to do the various tasks on the world.</PRE>
+<PRE>	prog2.c-File where the program runs from. Does any reading of argument passed in order to change
+	the window size. It also starts up xforms and Glut.</PRE>
+<PRE>	prog2_gui.c-gui generated with fdesign</PRE>
+<PRE>	prog2_gui.fd-file used by fdesign to create gui</PRE>
+<PRE>	prog2_gui_cb.c-file that contains the calls to perform tasks that your buttons should perform.</PRE>
+<PRE>	xforms_utils.c-file where all your xforms stuff is done.</PRE>
+<PRE>Running Program
+	To compile my game type &quot;make&quot;.  To run my game type &quot;p2sunx&quot;.
+	My game works like so. You click init maze untill you are satisfied with a playable grid of 
+	to walk through.  Some times you start on top of an object hence you are crushed and can not
+	move in any direction. Then you can use the gui buttons to move across the grid or you can use
+	arrow keys.  In order to use the arrow keys you have to have the window selected.  You step 
+	through the world and when you come up to a object and try to move through it you will it wont 
+	let you and it will print out can not move that direction. So then you try a different 
+	direction. If you can not move then you push int world and start over.  Every time you move 
+	across it randomly selects a spot on the grid that is not a wall and puts a object there. I 
+	make a object struct to store all the infomation about each object and I also have a array of
+	objects to keep track on where they are. In the construction of the objects that is where all 
+	random generation is done. Basically I started with the old program and built on it.  I also 
+	figured out a way to make the cb file shorter, by having buttons share the same call back.
+</PRE>
+<PRE>Problems
+	I was trying to make an animation when you win the game, but for some reason I could not get
+	the shapes to move with out sliding the sliders around. It seems that the only way to 
+	animate is to change stuff in redraw maze. I ran out of time tying to figure this out. </PRE>
+<PRE>
+<img border="0" src="pic.jpg">	</PRE>
