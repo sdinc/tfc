@@ -1,0 +1,158 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0102 
+header_name {.h} 
+code_name {.cxx}
+class gui {open
+} {
+  Function {gui()} {open
+  } {
+    Fl_Window form {
+      label window open
+      xywh {17 41 655 600} type Double resizable
+      code0 {\#include <FL/fl_draw.H>} visible
+    } {
+      Fl_Box gl_window {
+        label gl_window
+        xywh {15 35 630 395} box EMBOSSED_FRAME labeltype NO_LABEL
+        code0 {\#include "gl_window.h"}
+        class CGL_Window
+      }
+      Fl_Group {} {
+        label Camera open
+        xywh {10 455 75 100} box ENGRAVED_FRAME
+      } {
+        Fl_Slider x {
+          label x
+          callback {gl_window->camera(o->value(),'x');
+gl_window->redraw();}
+          xywh {20 465 15 70} minimum -180 maximum 180 step 0.1
+        }
+        Fl_Slider y {
+          label y
+          callback {gl_window->camera(o->value(),'y');
+gl_window->redraw();}
+          xywh {40 465 15 70} minimum -180 maximum 180 step 0.1
+        }
+        Fl_Slider z {
+          label z
+          callback {gl_window->camera(o->value(),'z');
+gl_window->redraw();}
+          xywh {60 465 15 70} minimum -180 maximum 180 step 0.1
+        }
+      }
+      Fl_Button quit {
+        label quit
+        callback {gl_window->quit_cb();}
+        xywh {525 540 125 35} labelsize 12
+      }
+      Fl_Menu_Bar menu_bar {open
+        xywh {0 0 845 25}
+      } {
+        submenu file_menu {
+          label {&file} open
+          xywh {0 0 100 20}
+        } {
+          menuitem quit_file_menu_item {
+            label {&quit}
+            callback {file_menu_cb(o,0)}
+            xywh {10 10 100 20}
+          }
+        }
+      }
+      Fl_Group {} {
+        label pendulum open
+        xywh {100 450 390 145} box ENGRAVED_FRAME
+      } {
+        Fl_Value_Slider gravity {
+          label Gravity
+          callback {gl_window->pend(o->value(),'g');
+gl_window->redraw();}
+          xywh {190 530 120 15} type Horizontal align 4 maximum 19 value 9.8
+        }
+        Fl_Value_Slider Mass {
+          label Mass
+          callback {gl_window->pend(o->value(),'m');
+gl_window->redraw();}
+          xywh {170 480 120 15} type Horizontal align 4 minimum 1 maximum 5 value 2
+        }
+        Fl_Value_Slider Length {
+          label Length
+          callback {gl_window->pend(o->value(),'l');
+gl_window->redraw();}
+          xywh {170 455 120 15} type Horizontal align 4 maximum 20 value 10
+        }
+        Fl_Value_Slider angle {
+          label angle
+          callback {gl_window->pend(o->value(),'a');
+gl_window->redraw();}
+          xywh {170 505 120 15} type Horizontal align 4 maximum 179 value 60
+        }
+        Fl_Button ball_2 {
+          label {two balls}
+          callback {gl_window->pend(2,'b');
+gl_window->redraw();}
+          xywh {395 555 80 20}
+        }
+        Fl_Button ball_1 {
+          label {one ball}
+          callback {gl_window->pend(1,'b');
+gl_window->redraw();}
+          xywh {165 555 80 20}
+        }
+        Fl_Value_Slider Mass1 {
+          label Mass
+          callback {gl_window->pend(o->value(),'M');
+gl_window->redraw();}
+          xywh {365 480 120 15} type Horizontal align 4 minimum 1 maximum 5 value 2
+        }
+        Fl_Value_Slider Length1 {
+          label Length
+          callback {gl_window->pend(o->value(),'L');
+gl_window->redraw();}
+          xywh {365 455 120 15} type Horizontal align 4 maximum 20 value 10
+        }
+        Fl_Value_Slider angle2 {
+          label angle
+          callback {gl_window->pend(o->value(),'A');
+gl_window->redraw();}
+          xywh {365 505 120 15} type Horizontal align 4 maximum 179 value 40
+        }
+      }
+      Fl_Value_Slider h {
+        label {h value}
+        callback {gl_window->pend(o->value(),'h');
+gl_window->redraw();} selected
+        xywh {385 530 80 15} type Horizontal align 4 maximum 0.5 step 0.001 value 0.04
+      }
+      Fl_Button animate {
+        label Run
+        callback {gl_window->animate_go();
+gl_window->redraw();}
+        xywh {555 450 60 25} type Toggle
+      }
+    }
+    code {filename[0] = '\\0';} {}
+  }
+  Function {show()} {open
+  } {
+    code {form->show();
+gl_window->show();} {}
+  }
+  decl {char filename[1024];} {}
+  Function {file_menu_cb(Fl_Widget *w, void*)} {open
+  } {
+    code {Fl_Menu_* mw = (Fl_Menu_*)w;
+  const Fl_Menu_Item* m = mw->mvalue();
+  if (!m)
+    printf("NULL\\n");
+  else if (m->shortcut())
+    printf("%s - %s\\n", m->label(), fl_shortcut_label(m->shortcut()));
+  else
+    printf("<%s>\\n", m->label());
+
+if (!strcmp(m->label(), "&load"))
+	printf("got load\\n");
+else if (!strcmp(m->label(), "&quit"))
+	gl_window->quit_cb();} {}
+  }
+} 

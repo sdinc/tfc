@@ -1,0 +1,88 @@
+<font SIZE="2">
+<p>Jason Brody-Stewart</p>
+<p>Final Project</p>
+<p><u><b>Purpose</b></u>-To teach my self how to do a animation with openGL. I
+learned that hard coding</font> <font SIZE="2">animation is not a good tactic.
+It would be easier to make key fame generation</font> <font SIZE="2">and let the
+computer do the in-between steps.</p>
+<p><b>Main files</b>-disp_utils.c, formd.c, Makefile, maze.c, final.c,
+final_gui.c,</font> <font SIZE="2">final_gui.fd, final_gui_cb.c, xforms_utils.c</p>
+<p><b>disp_utils.c-</b>Makes all the openGL calls does the actual drawing. I had
+to</font> <font SIZE="2">add a lot of function to this file.</p>
+<p><b>formd.c-</b>File used by fdesign to create gui.</p>
+<p><b>Makefile-</b>File used to complie the program. Must be in the following</font>
+<font SIZE="2">syntax [make sun_xforms].</p>
+<p><b>maze.c</b>-File were all world manipulations are done. This is where I
+wrote</font> <font SIZE="2">the procedures that the buttons called in order to
+do the various tasks on</font> <font SIZE="2">the world.</p>
+<p><b>final.c</b>-File where the program runs from. Does any reading of argument</font>
+<font SIZE="2">passed inorder to change the window size. It also starts up
+xforms and</font> <font SIZE="2">Glut.</p>
+<p><b>final_gui.c-</b>gui generated with fdesign</p>
+<p><b>final_gui.fd</b>-file used by fdesign to create gui</p>
+<p><b>final_gui_cb.c</b>-file that contains the calls to perform tasks that your</font>
+<font SIZE="2">buttons should perform.</p>
+<p><b>xforms_utils.c</b>-file where all your xforms stuff is done.</p>
+<p>&nbsp;</p>
+<p><b><u>Running Program</u></b></p>
+<p>To compile the program type &quot;make&quot;. To run my program type
+&quot;skater&quot;.</font> <font SIZE="2">Then you can use the gui to start the
+skater, or by typing the i key. Once</font> <font SIZE="2">The program is
+running you can use the gui to change various things. As a</font> <font SIZE="2">default
+all lighting is turned on, and the light object button is off.</font> <font SIZE="2">The
+light object button turns on wire spheres at the location of the</font> <font SIZE="2">light.
+Also you can perform all the maneuvers from the display window.</font> <font SIZE="2">I
+did this in order so that you can do more than one move</font> <font SIZE="2">at
+a time. It is quite difficult to click the mouse button fast enough</font> <font SIZE="2">so
+that you can do more than one move at a time. While on the key-board</font> <font SIZE="2">you
+could click all the maneuvers at the same time by pressing all the keys</font> <font SIZE="2">at
+the same time.(k,v,s,f,o,3) I also included a bullet time feature.</font> <font SIZE="2">This
+means that by clicking the mouse any where in the display window the</font> <font SIZE="2">animation
+stops and you can spin the guy so that you can see what he is</font> <font SIZE="2">doing
+exactly. By clicking the mouse again you can continue his</font> <font SIZE="2">animation.
+Algorithm I basically hard coded everything into display</font> <font SIZE="2">utilities.
+I realized that I could used hierarchical structures after I</font> <font SIZE="2">was
+already done hard coding everything, and I ran out of time to change back.</font>
+<font SIZE="2">This causes animation of the program very difficult to follow. It
+also</font> <font SIZE="2">caused the animation of the program difficult to come
+up with.</font>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp; <font SIZE="2">The animation works like this:</font> <font SIZE="2">There
+is a time variable called t, and a velocity variable called vel and a</font> <font SIZE="2">acceleration
+variable called accel. From t the position of the guy is</font> <font SIZE="2">computed,
+using polar cords. The value of accel=accel+vel. So this means</font> <font SIZE="2">the
+value of vel never changes but the value of accel goes between -16</font> <font SIZE="2">and
+16. Which then means that the value of t changes exponentially between</font> <font SIZE="2">-140
+and 200. This creates the guy to move like he should in real life.</font> <font SIZE="2">So
+that while he is going down he is accelerating and while he is going</font> <font SIZE="2">up
+he is decelerating. But it is even more complicated than that! When</font> <font SIZE="2">he
+is in the ramp his position is computed by a cylindrical cords, but when</font> <font SIZE="2">he
+is in the air his position is computed by liner cords. So at the value</font> <font SIZE="2">of
+t=-40 he is at the top of the right side of the half pipe, and when</font> <font SIZE="2">t=220
+he is at the top of the left side of the half pipe. When t=90 he</font> <font SIZE="2">is
+at the bottom of the ramp. So at the t values between 180, 0 he is</font> <font SIZE="2">moving
+in cylindrical cords and at the t between 180,220 and 0, -140 he</font> <font SIZE="2">is
+moving in linear cords.</p>
+<p>&nbsp;&nbsp;&nbsp; The tricks work like this: By a sequence of flags and
+calls to the methods and the value of t. The globals for the body and the skate
+board are set. I figured out the</font> <font SIZE="2">values by trial error
+method. All animation is done by calling a portion</font> <font SIZE="2">of
+tricks based on the globals flags.</font> <font SIZE="2">It also works like a
+game in some respects. If you do not complete the</font> <font SIZE="2">move in
+the time you are in the air he falls. It is possible to complete</font> <font SIZE="2">all
+moves except the ollie move. I designed it that way so that if you</font> <font SIZE="2">perform
+all the tricks at least on trick will make you fall. The trick to</font> <font SIZE="2">make
+most moves is to click the gui or key when he is at the bottom of the ramp This
+way the second he is in the air he starts performing the trick.</p>
+<p><b><u>Problems</u></b></p>
+<p>I had problems figuring out the animation mathematics. But I had enough</font>
+<font SIZE="2">time to solve this with trial and error. I had serious problems
+modeling</font> <font SIZE="2">the ramp. I could not seem to figure out the control
+points for a half</font>-<font SIZE="2">pipe. So I used a series of scaled cubes
+with cylindrical cords, in a for loop.</font> <font SIZE="2">basically my main
+problem is that I needed to use trial error on each part of,</font> <font SIZE="2">each
+animation. So the entire project took a lot more time than expected. Plus</font>
+<font SIZE="2">the fact that once I had it all done, then we learned how to do </font><font size="2">higher arch</font>
+<font SIZE="2">structures in the class.</font></p>
+<p><font SIZE="2"></p>
+<p><img border="0" src="pic.jpg" width="1024" height="768"></p>
+</font>

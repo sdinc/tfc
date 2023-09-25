@@ -1,0 +1,70 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+</head>
+<PRE>			  README FILE</PRE>
+<PRE>  Nusan Brounstein
+  Cats ID:  nusan</PRE>
+<PRE>  Jason Brody-Stewart
+  Cats ID:  spudnic</PRE>
+<PRE>  3/3/2003
+  Programming Assignment 3
+  CMPS104A Winter 2003
+</PRE>
+<PRE>Purpose- To write a parser to be used in our compiler.</PRE>
+<PRE>Files
+	c0.c- The main file that does all the calls to the various other 
+parts of the compiler. It checks for flags, all the options and 
+existance of the argument file.  If the flags for creating the &quot;*.tok&quot; and 
+&quot;*.ast&quot; are set then it opens those files at this point.  Then it proceeds 
+to call yyparse(). Which invokes the parse.c file. This file calls 
+the scanner and uses rules from the parser.y to match the incoming 
+tokens.  When a rule is matched it builds the tree accordingly. Then when 
+it is finished parsing the entire tree it calls AST_semantics(). Then 
+AST_semantics checks for the flag to dump the tree, and the tree is dumped.
+	</PRE>
+<PRE>	scanner.l-This file gives the valid tokens that the parser will use to 
+match the grammar.  When a token is matched it builds up the various fields 
+about that token such as a serial number, and token code number, and a lexical 
+information about that token. 
+	</PRE>
+<PRE>	tokenast.c- This file contains the token AST, and keyword structures, 
+as well as a make_tok constructor, and a couple assessor functions which 
+dump the token to the &quot;*.tok&quot; file and return the token code.  The keyword 
+structure stores a keyword from the c0 language and its symbolic name.  The 
+constructor, make_tok(int info), first checks if the argument token is a 
+identifier and if so checks to see if it is a keyword as well by use of 
+bsearch.  Then if it is a keyword it changes the symbolic name from 
+identifier to keyword.  Afterwards if the token dumping flag is set it then 
+dumps the token to the &quot;*.tok&quot; file.
+	tree stuff in tokenast.c-added the following functions to our tokenast.c 
+functions: 
+	make_root_token()-simply creates a root for the tree and initializes the 
+various fields; 
+	adopt()-takes in a root and some children and assigns those children and 
+child's of the root.
+	ast_semantics()-is called when the entire file has been parsed. If the flag
+for dumping the ast is set it calls the ast_dump function.
+	print_ident()- this is a simple function used to print out indents for dump
+of the ast file.  
+	dumpAST()-this is basically a recursive tree walk that steps down the tree 
+printing out information as it is encountered.  I also added a feature so that it 
+does not print the &quot;;&quot; when they appear in the tree in the cases of if();else;.  </PRE>
+<PRE>	yyexternals.h- This file contains all the external variables and 
+functions which need to be passed between the various modules. </PRE>
+<PRE>	stringtable.c-the file that contain the the string table ADT.  
+A lot of the functions are self explanatory, so I am going to talk about 
+the more complicated functions.  The inturn_StringTable, debug dump, 
+and the rehash.</PRE>
+<PRE>	parser.y-This file is used to generate the parser.c file, which is 
+basically a finite state machine.  The file contains rules for the c0 language. 
+When a rule is matched it builds the tree for that rule by calling our adopt 
+function.  When it has reduced that entire file it calls make_root_token and 
+then calls ast_semantics with that root token.  </PRE>
+<PRE>Problems 
+	If the file you run our program on a file that  has a invalid token, and 
+the file you are running on is in another directory, when it prints the error it 
+prints the full path of the file. I figured I should leave this in so that 
+if someone complies different versions of a file and they are in different 
+directories they know which file the error is in.
+	  
+</PRE>

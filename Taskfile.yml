@@ -36,7 +36,7 @@ tasks:
   tf-apply:
     desc: "terraform apply via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply"
+      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply --auto-approve"
   aws-who:
     desc: "aws sts get-caller-identity"
     cmds:
@@ -49,15 +49,24 @@ tasks:
     desc: "aws sts get-caller-identity"
     cmds:
       - 'docker run --entrypoint="/bin/bash" {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
-  aws-web-down:
+  sfefoil-down:
     desc: "pull site from s3"
     cmds:
-      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} s3 sync s3://sfefoil web/"
-  aws-web-up:
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} s3 sync s3://sfefoil web/sfefoil/"
+  sfefoil-up:
     desc: "push site from local to s3"
     cmds:
-      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} s3 sync web/ s3://sfefoil "
-
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} s3 sync web/sfefoil/ s3://sfefoil "
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} cloudfront create-invalidation --distribution-id E12ZXTN97X742W --paths /index.html"
+  sd-down:
+    desc: "pull site from s3"
+    cmds:
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} s3 sync s3://specialtydiagnostics web/specialtydiagnostics/"
+  sd-up:
+    desc: "push site from local to s3"
+    cmds:
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} s3 sync web/specialtydiagnostics/ s3://specialtydiagnostics "
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} cloudfront create-invalidation --distribution-id E394EPQZ3ZNKW0 --paths /index.html"
   checkov:
     desc: "run checkov via docker"
     cmds:

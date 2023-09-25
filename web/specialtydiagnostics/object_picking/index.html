@@ -1,0 +1,41 @@
+<font SIZE="2">
+<p><b>Jason Brody-Stewart</b></p>
+<p>Programming assignment 3</p>
+<p><b><u>Purpose</u></b>-To learn how to independently pick objects, and with
+those picked objects,</font> <font size="2">independently</font><font SIZE="2">
+translate, scale and rotate them.</p>
+<p>Main files-disp_utils.c, formd.c, Makefile, maze.c, prog3.c, prog3_gui.c,</font>
+<font SIZE="2">prog3_gui.fd, prog3_gui_cb.c, xforms_utils.c</p>
+<p>disp_utils.c-Makes all the openGL calls does the actual drawing. I had to</font>
+<font SIZE="2">add a lot of function to this file.</p>
+<p>formd.c-File used by fdesign to create gui.</p>
+<p>Makefile-File used to compile the program. Must be in the following</font> <font SIZE="2">syntax
+[make sun_xforms].</p>
+<p>maze.c-File were all world manipulations are done. This is where I wrote</font>
+<font SIZE="2">the procedures that the buttons called in order to do the various
+tasks on</font> <font SIZE="2">the world.</font>&nbsp;</p>
+<p><font SIZE="2">prog3.c-File where the program runs from. Does any reading of
+argument</font> <font SIZE="2">passed in order to change the window size. It
+also starts up xforms and</font> <font SIZE="2">Glut.</p>
+<p>prog3_gui.c-gui generated with fdesign</p>
+<p>prog3_gui.fd-file used by fdesign to create gui</p>
+<p>prog3_gui_cb.c-file that contains the calls to perform tasks that your</font>
+<font SIZE="2">buttons should perform.</p>
+<p>xforms_utils.c-file where all your xforms stuff is done.</p>
+<p><b><u>Running Program</u></b></p>
+<p>To compile the program type &quot;make&quot;. To run my program type
+&quot;p3sunx&quot;. Once</font> <font SIZE="2">The program is running you can
+use the gui to change various things. As a</p>
+<p>default all lighting is turned on, and the light object button is off.</font>
+<font SIZE="2">The light object button turns on wire spheres at the location of
+the</font> <font SIZE="2">light. By default the eye is too close to see all
+lights. If you click</font> <font SIZE="2">in the display window you can reset
+the scene by typing the 'i' key. I</font> <font SIZE="2">set up the sliders so
+that they give the world coordinates, this way it is</font> <font SIZE="2">quite
+difficult to move the objects out of the world. So as you change</font> <font SIZE="2">between
+objects the sliders also change(update).</p>
+<p><u><b>Problems</b></u></p>
+<p>I had problems drawing the spheres where the lights are, that is why I</font>
+<font SIZE="2">have the position of the lights done after the redraw_maze() in
+my</font> <font SIZE="2">displayFunc().</font></p>
+<p><img border="0" src="pic.jpg"></p>

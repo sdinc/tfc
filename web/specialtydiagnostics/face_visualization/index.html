@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+
+<BODY>
+<p>
+&nbsp;
+</p>
+<CENTER>
+<H1>Visualization of WomenCT</H1>
+<p>&nbsp;</p>
+</CENTER>
+<H2>Contents: </H2>
+
+<DL>
+<DD>
+<A HREF="#introduction">Purpose</A>
+<DD>
+<A HREF="#build">Building the program</A>
+<DD>
+<A HREF="#running">Running the GUI</A>
+<DD>
+<A HREF="#Problems">Problems</A>
+</DL>
+
+<P>
+<IMG SRC="wh_bar.gif" ALT="---------------" width="640" height="11">
+<H2><A NAME="introduction">Purpose</A></H2>
+
+<p>To familiarize our selves with visualizing large data sets using a gui built
+by fltk and visual tools supplied by vtk and openGL</p>
+
+<p>&nbsp;</p>
+
+<P>
+<IMG SRC="wh_bar.gif" ALT="---------------">
+<H2><A NAME="build">Building the program</A></H2>
+<p>The program is using a data set from National Library of Medicine <a href="http://www.nlm.nih.gov/research/visible/visible_human.html">Visible
+Human</a> project, more specifically the visible women project. More information
+about the data set can be found at <a href="http://www.crd.ge.com/esl/cgsp/projects/makevw/">http://www.crd.ge.com/esl/cgsp/projects/makevw</a></p>
+<p>In order to compile the program you must have the following installed, vtk 4.0
+, fltk 1.1.4 and glut-3.7.6.&nbsp; All are available on-line and free. Details on
+how to install them can be found at&nbsp;<a href="http:/www.soe.ucsc.edu/~pang/161/w04/prog1/data/VTKforPC.txt">http:/www.soe.ucsc.edu/~pang/161/w04/prog1/data/VTKforPC.txt</a>&nbsp;
+The program will run under both windows and unix machines.&nbsp; I developed the
+program under windows using ms Visual basic C++ 6.0.&nbsp;&nbsp;&nbsp;</p>
+<font size="4">Build under windows</font><p>First open MS Visual basic C++ 6.0.
+Then go to the file menu -&gt; open work space, and you should get some thing like this.</p>
+<p><img border="0" src="open_work_space.gif" width="428" height="330"></p>
+<p>Locate the VizFLTK.dsw in red and click on open in blue.&nbsp; It should be
+located in the same directory as the program it self.</p>
+<p><img border="0" src="ms_visual_comp.gif" width="772" height="538"></p>
+<p>Once the program is loaded you can compile the program by clicking the red
+circled button.&nbsp; Then you can execute the program by clicking the blue
+circled button.&nbsp; The program should compile with no errors assuming you
+have the correct installation of the required files and applications as
+specified from above. </p>
+<p>&nbsp;Build under unix</p>
+<p>Log on to a unix machine using the X-Windows systems. With a command like so
+ssh -XC -l usrname ip, you should get something like so.</p>
+<p><img border="0" src="Readme3.jpg" width="1013" height="591"></p>
+<p>navigate to the directory where the program is located and type make. This
+compiles the program and should create a executable file called human.&nbsp; To
+run the program type human in the terminal.</p>
+<p><IMG SRC="wh_bar.gif" ALT="---------------">
+</p>
+<H2><A NAME="running">Running the GUI</A></H2>
+<p>The program works the same under both windows and unix so I will only show
+the windows version of the program running.</p>
+<p><img border="0" src="loading_data_gui.gif" width="877" height="465">&nbsp;&nbsp;&nbsp;
+</p>
+<p>For optimization purposes you can load the skin or the bone alone.&nbsp; This
+is done by using the display model drop down.&nbsp; If you plan on looking at
+the skin and the bone I suggest you use the both labeled in red , as shown
+above. Once you have done this you can click on the load button labeled in blue.
+The gui will prompt you for the location of the data file(womenCT
+directory).&nbsp; Once you have told the program where the data is located go
+ahead and click the ok button in green. You will notice that the program seems
+to of stalled. If you are running in windows you can change windows to a console
+that looks like so.</p>
+<p><img border="0" src="progress_loading.gif" width="515" height="211">&nbsp;&nbsp;
+</p>
+<p>For both the skin and the bone the console will display a sequence of event
+and the time it took to start and complete the events.&nbsp; If you loaded the
+skin and the bone both the you should see the sequence go through twice.&nbsp;
+In other words the done should of come up twice.</p>
+<p>You should now see something like so</p>
+<p><img border="0" src="both_wire.gif" width="496" height="587"></p>
+<P>
+I include some features that help you visual the data in different way.&nbsp; 
+<P>
+&nbsp;
+<P>
+<img border="0" src="skin_wire.gif" width="261" height="311"> <img border="0" src="skin_smooth.gif" width="261" height="312">
+<P>
+<img border="0" src="skull_wire.gif" width="262" height="312"> <img border="0" src="skull_smooth.gif" width="263" height="313">
+<P>
+<IMG SRC="wh_bar.gif" ALT="---------------">
+<P>
+<A NAME="Problems"><b><font size="5">Problems</font></b></A>
+<P>I had several problems when I first started the project.&nbsp; The first and
+most complicated was to understand the vtk source and to trace through the
+sample project and figure out exactly how vtk was being used.&nbsp; To solve
+this I used the ms visual basic c++ 6 debugger.<P><img border="0" src="break_points.gif"><P>The
+way it works is you place the a break point by typing F9 and a red dot
+appears(the red circle) then build and run the program in debugging mode by
+pressing the button in the blue circle.&nbsp; This loads your program in a
+debugging mode runs it hits the location of the break point.&nbsp; This allows
+you to trace through the program very easily. Also a special menu pops up that
+allows you to execute the next line or function or ect ...&nbsp; It&nbsp; looks
+like so.<P><img border="0" src="Readme4.jpg"><br>
+<P>Once I figured out the debugger I was able to figure out the exact order of
+the program line by line.<P>The main changes came from replacing the #defines to
+variables set by the fluid gui.&nbsp; The DATA_PATH was replaced by a
+fl_dir_chooser() function that allowed the user to specify the directory where
+the data set was located.&nbsp; Because the data set was so large I had several
+optimization built into my GUI.&nbsp; You could load just the skin or the bone
+alone, or at the same time.&nbsp; You can view the data in smooth or wire frame
+and you can also make the data transparent.&nbsp;&nbsp;<P>I planned on making
+the skin transparent so that you could see the behind the skin.&nbsp; This
+brought up serious issues, in order to have the skin appear transparent with the
+bone behind the skin I would have to draw the polygons in the correct order. It
+turned out that if I drew the bone first then I drew the skin and the skin was
+transparent then it worked perfectly.<P>&nbsp;
+<P>
+&nbsp;
+<P>
+&nbsp;
+<P>
+&nbsp;
+</BODY>
+</HTML>
+
