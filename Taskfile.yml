@@ -25,6 +25,11 @@ tasks:
       - task --list
       - date -u
     silent: true
+  clean:
+    desc: "clean all generated files"
+    cmds:
+      - rm -rvf .external_modules .terraform
+      - task bazel-clean
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
