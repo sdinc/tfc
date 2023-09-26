@@ -92,11 +92,12 @@ tasks:
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "
   mac-bb:
-    desc: "MBP bazel build from container"
+    #this had problems with arm64 architexture will solve later
+    #desc: "MBP bazel build from container"
     cmds:
       - 'docker run -e USER="$(id -u)" -u="$(id -u)" {{.SDINC_BAZEL_DOCKER_OPTIONS}} {{.SDINC_BAZEL_VERSION}} --output_user_root=$(pwd)/bazel_files/workspace1/build_output build '
   bazel-clean:
-    desc: "bazel clean on all bazel workspaces"
+    #desc: "bazel clean on all bazel workspaces"
     cmds:
       - task --parallel clean-alpine clean-sdinc_aws
   clean-alpine:
