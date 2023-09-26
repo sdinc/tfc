@@ -4,7 +4,7 @@
 
 * docker: one way to install is with [docker desktop](https://www.docker.com/products/docker-desktop/) 
 * task: one way to install is with a ```sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin``` more details at [reference](https://taskfile.dev/installation/#get-the-binary)
-* bazel: running as a container had problems with arm64 architexture on a MBP so I installed with brew ```brew install bazel``` [reference](https://bazel.build/install/os-x#install-on-mac-os-x-homebrew)   [general install](https://bazel.build/install)
+* [bazel](bazel.md)
 
 ## Help
 

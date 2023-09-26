@@ -15,7 +15,7 @@ Reading about bazel and docker, https://earthly.dev/blog/push-docker-image-bazel
 
 ## Install bazel
 
-Install the [binary](https://github.com/bazelbuild/bazelisk/releases) and put it on your path something like ```/usr/local/bin/``` 
-[Reference](https://bazel.build/install)
+Bazel running as a container had problems with arm64 architexture on a MBP so I installed with brew ```brew install bazel``` [reference](https://bazel.build/install/os-x#install-on-mac-os-x-homebrew)   [general install](https://bazel.build/install)
+
 
 
