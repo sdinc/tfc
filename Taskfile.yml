@@ -42,8 +42,8 @@ tasks:
     desc: "aws sts get-caller-identity"
     cmds:
       - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} sts get-caller-identity"
-  aws-build:
-    desc: "build a aws container with bash shell"
+  sdinc-build:
+    desc: "build sdinc container with bash shell"
     cmds:
       - "docker build -t {{.SDINC_LATEST}} ."
   aws-cli:
@@ -80,3 +80,7 @@ tasks:
     desc: "run azure shell"
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}}"
+  sdinc-shell:
+    desc: "run sdinc container as bash shell"
+    cmds:
+      - 'docker run --entrypoint="/bin/bash" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
