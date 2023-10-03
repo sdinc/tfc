@@ -22,22 +22,27 @@ tasks:
       - task --list
       - date -u
     silent: true
+  # due to containers running as root need to sudo to remove files TODO: fix this up later
+  clean:
+    desc: "remove generated files"
+    cmds:
+      - "sudo rm -rvf .terraform .external_modules"
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} init"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} init'
   tf-login:
     desc: "terraform login via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} login"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} login'
   tf-plan:
     desc: "terraform plan via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} plan"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} plan'
   tf-apply:
     desc: "terraform apply via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply --auto-approve"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} apply --auto-approve'
   aws-who:
     desc: "aws sts get-caller-identity"
     cmds:
