@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "azure-sfefoil-com" {
   name     = "example-resources"
-  location = "West Europe"
+  location = "West US 2"
 }
 
 resource "azurerm_dns_zone" "azure-sfefoil-com" {

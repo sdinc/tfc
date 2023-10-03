@@ -22,7 +22,7 @@ terraform {
 }
 
 provider "azurerm" {
-
+ features {}
 }
 
 provider "google" {
