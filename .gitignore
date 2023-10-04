@@ -36,3 +36,8 @@ terraform.rc
 .DS_Store
 
 .external_modules
+
+.env
+client.crt
+client.key
+client.pfx

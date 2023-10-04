@@ -2,6 +2,8 @@
 
 version: '3'
 
+dotenv: ['.env']
+
 vars:
   GREETING: Hello, Welcome to SDinc ( Specialty Diagnostics Incorporated )
   SDINC_TF_VERSION: "hashicorp/terraform:1.5.2"
