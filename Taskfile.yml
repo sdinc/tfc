@@ -81,6 +81,11 @@ tasks:
     desc: "auth to azure cli"
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az login"
+  az-sp:
+    cmds:
+      - docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az account list --query "[?user.name=='brodytwo@gmail.com'].{Name:name, ID:id, Default:isDefault}" --output Table
+      - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az account show"
+      #- "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az ad sp create-for-rbac --name tfbrody --role Contributor --scopes /subscriptions/<subscription_id>"
   az-shell:
     desc: "run azure shell"
     cmds:
