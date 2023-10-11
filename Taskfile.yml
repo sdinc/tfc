@@ -103,3 +103,8 @@ tasks:
   check-tools:
     cmds:
       - "which docker"
+  rust-build:
+    desc: "build the rust container, rust application"
+    dir: "{{.ROOT_DIR}}/rust"
+    cmds:
+      - "docker build -t sdinc-rust:latest ."
