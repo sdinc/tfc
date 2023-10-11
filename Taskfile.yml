@@ -32,7 +32,7 @@ tasks:
   ci: #used by azure pipelines
     deps: [check-tools]
     cmds:
-      - task checkov
+      - task --parallel checkov rust-build
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
