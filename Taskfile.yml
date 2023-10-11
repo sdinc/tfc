@@ -29,6 +29,10 @@ tasks:
     desc: "remove generated files"
     cmds:
       - "sudo rm -rvf .terraform .external_modules"
+  ci: #used by azure pipelines
+    deps: check-tools
+    cmds:
+      - task checkov
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
@@ -96,3 +100,6 @@ tasks:
     desc: "run sdinc container as bash shell"
     cmds:
       - 'docker run --entrypoint="/bin/bash" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
+  check-tools:
+    cmds:
+      - "which docker"

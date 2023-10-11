@@ -38,6 +38,5 @@ terraform.rc
 .external_modules
 
 .env
-client.crt
-client.key
-client.pfx
+
+client.*
