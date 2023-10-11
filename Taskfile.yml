@@ -2,12 +2,15 @@
 
 version: '3'
 
+dotenv: ['.env']
+
 vars:
   GREETING: Hello, Welcome to SDinc ( Specialty Diagnostics Incorporated )
   SDINC_TF_VERSION: "hashicorp/terraform:1.5.2"
   SDINC_TF_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
-  SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.azure:/root/.azure -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_AZ_LATEST: "mcr.microsoft.com/azure-cli:latest"
+  SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.azure:/root/.azure  -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_AWS_VERSION: "public.ecr.aws/aws-cli/aws-cli:2.13.18"
   SDINC_AWS_LATEST: "public.ecr.aws/aws-cli/aws-cli:latest"
   SDINC_AWS_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v $(pwd):$(pwd) -w $(pwd)"
@@ -21,6 +24,11 @@ tasks:
       - task --list
       - date -u
     silent: true
+  # due to containers running as root need to sudo to remove files TODO: fix this up later
+  clean:
+    desc: "remove generated files"
+    cmds:
+      - "sudo rm -rvf .terraform .external_modules"
   ci: #used by azure pipelines
     deps: check-tools
     cmds:
@@ -28,25 +36,25 @@ tasks:
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} init"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} init'
   tf-login:
     desc: "terraform login via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} login"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} login'
   tf-plan:
     desc: "terraform plan via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} plan"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} plan'
   tf-apply:
     desc: "terraform apply via docker backend terraform cloud"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_TF_VERSION}} apply --auto-approve"
+      - 'docker run --entrypoint="/usr/local/bin/terraform" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} apply --auto-approve'
   aws-who:
     desc: "aws sts get-caller-identity"
     cmds:
       - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} sts get-caller-identity"
-  aws-build:
-    desc: "build a aws container with bash shell"
+  sdinc-build:
+    desc: "build sdinc container with bash shell"
     cmds:
       - "docker build -t {{.SDINC_LATEST}} ."
   aws-cli:
@@ -75,9 +83,23 @@ tasks:
     desc: "run checkov via docker"
     cmds:
       - "docker run {{.SDINC_TF_DOCKER_OPTIONS}}  bridgecrew/checkov --directory $(pwd) "
-  az-cli:
+  az-login:
+    desc: "auth to azure cli"
     cmds:
-      - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "
+      - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az login"
+  az-sp:
+    cmds:
+      - docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az account list --query "[?user.name=='brodytwo@gmail.com'].{Name:name, ID:id, Default:isDefault}" --output Table
+      - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az account show"
+      #- "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}} az ad sp create-for-rbac --name tfbrody --role Contributor --scopes /subscriptions/<subscription_id>"
+  az-shell:
+    desc: "run azure shell"
+    cmds:
+      - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_LATEST}}"
+  sdinc-shell:
+    desc: "run sdinc container as bash shell"
+    cmds:
+      - 'docker run --entrypoint="/bin/bash" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
   check-tools:
     cmds:
       - "which docker"
