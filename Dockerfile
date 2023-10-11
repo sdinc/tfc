@@ -21,3 +21,4 @@ COPY --from=tf /bin/terraform /usr/local/bin/
 
 #checkov:skip=CKV_DOCKER_2:No need for healthcheck as development container used to build and not run stuff
 #checkov:skip=CKV_DOCKER_3:No need for user as development container used to build and not run stuff
+#checkov:skip=CKV_DOCKER_7:We want to use the latest so skip this rule
