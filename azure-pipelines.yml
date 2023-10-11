@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  imageName: 'pipelines-javascript-docker'
+  DOCKER_BUILDKIT: 1
+
 steps:
 - script: pwd
   displayName: 'Print pwd'
@@ -18,6 +22,8 @@ steps:
     sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
     echo $PATH
     export PATH=${PATH}:~/.local/bin
-    task ci
 
   displayName: 'install task and run task ci'
+
+- script: task ci
+  displayName: 'task ci'
