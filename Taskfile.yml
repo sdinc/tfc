@@ -22,7 +22,7 @@ tasks:
       - date -u
     silent: true
   ci: #used by azure pipelines
-    deps: check-tools
+    deps: [check-tools]
     cmds:
       - task checkov
   tf-init:
