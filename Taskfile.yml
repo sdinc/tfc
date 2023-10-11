@@ -21,6 +21,10 @@ tasks:
       - task --list
       - date -u
     silent: true
+  ci: #used by azure pipelines
+    deps: check-tools
+    cmds:
+      - task checkov
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
@@ -74,3 +78,6 @@ tasks:
   az-cli:
     cmds:
       - "docker run {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_AZ_VERSION}} "
+  check-tools:
+    cmds:
+      - "which docker"
