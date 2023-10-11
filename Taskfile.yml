@@ -30,7 +30,7 @@ tasks:
     cmds:
       - "sudo rm -rvf .terraform .external_modules"
   ci: #used by azure pipelines
-    deps: check-tools
+    deps: [check-tools]
     cmds:
       - task checkov
   tf-init:
