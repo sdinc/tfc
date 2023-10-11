@@ -20,4 +20,4 @@ steps:
     export PATH=${PATH}:~/.local/bin
     task ci
 
-  displayName: 'install task and run default'
+  displayName: 'install task and run task ci'
