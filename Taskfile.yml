@@ -8,6 +8,7 @@ vars:
   GREETING: Hello, Welcome to SDinc ( Specialty Diagnostics Incorporated )
   SDINC_TF_VERSION: "hashicorp/terraform:1.5.2"
   SDINC_TF_DOCKER_OPTIONS: "-t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_RUST_DOCKER_OPTIONS: "-t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)/rust"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
   SDINC_AZ_LATEST: "mcr.microsoft.com/azure-cli:latest"
   SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.azure:/root/.azure  -v $(pwd):$(pwd) -w $(pwd)"
@@ -15,6 +16,8 @@ vars:
   SDINC_AWS_LATEST: "public.ecr.aws/aws-cli/aws-cli:latest"
   SDINC_AWS_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v $(pwd):$(pwd) -w $(pwd)"
   SDINC_LATEST: "sdinc:latest"
+  SDINC_RUST_LATEST: "sdinc-rust:latest"
+  SDINC_RUST_VERSION: "sdinc-rust:0.0.1"
   EPOCH:
     sh: date +%s
 tasks:
@@ -28,11 +31,12 @@ tasks:
   clean:
     desc: "remove generated files"
     cmds:
-      - "sudo rm -rvf .terraform .external_modules"
+      - "sudo rm -rvf {{.ROOT_DIR}}/.terraform {{.ROOT_DIR}}/.external_modules {{.ROOT_DIR}}/rust/target"
   ci: #used by azure pipelines
     deps: [check-tools]
     cmds:
       - task --parallel checkov rust-build
+      - task --parallel rust-format rust-lint rust-test
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
@@ -103,8 +107,36 @@ tasks:
   check-tools:
     cmds:
       - "which docker"
+  rust-shell:
+    desc: "launch a rust shell/environment, ie rustc and cargo are on the path"
+    deps: [rust-build]
+    cmds:
+      - "docker run -i {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}}  "
+  rust-format:
+    desc: "format my code"
+    dir: "{{.ROOT_DIR}}/rust"
+    cmds:
+      - "docker run {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}} cargo fmt --all"
   rust-build:
     desc: "build the rust container, rust application"
     dir: "{{.ROOT_DIR}}/rust"
     cmds:
-      - "docker build -t sdinc-rust:latest ."
+      - "docker build -t {{.SDINC_RUST_LATEST}} -f Docker.builder ."
+  rust-test:
+    desc: "run the rust tests"
+    dir: "{{.ROOT_DIR}}/rust"
+    cmds:
+      - "docker run {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}} cargo test"
+  rust-lint:
+    dir: "{{.ROOT_DIR}}/rust"
+    cmds:
+      - "docker run {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}} cargo clippy --quiet"
+  rust-run:
+    dir: "{{.ROOT_DIR}}/rust"
+    cmds:
+      - "docker run {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}} cargo run"
+  rust-all:
+    desc: "run the SDLC(Software Development Life Cycle)"
+    deps: [clean, rust-build]
+    cmds:
+      - task --parallel rust-format rust-lint rust-test
