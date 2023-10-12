@@ -8,7 +8,7 @@ vars:
   GREETING: Hello, Welcome to SDinc ( Specialty Diagnostics Incorporated )
   SDINC_TF_VERSION: "hashicorp/terraform:1.5.2"
   SDINC_TF_DOCKER_OPTIONS: "-t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)"
-  SDINC_RUST_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)/rust"
+  SDINC_RUST_DOCKER_OPTIONS: "-t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)/rust"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
   SDINC_AZ_LATEST: "mcr.microsoft.com/azure-cli:latest"
   SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.azure:/root/.azure  -v $(pwd):$(pwd) -w $(pwd)"
@@ -110,7 +110,7 @@ tasks:
     desc: "launch a rust shell/environment, ie rustc and cargo are on the path"
     deps: [rust-build]
     cmds:
-      - "docker run {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}}  "
+      - "docker run -i {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}}  "
   rust-format:
     desc: "format my code"
     dir: "{{.ROOT_DIR}}/rust"
@@ -136,6 +136,6 @@ tasks:
       - "docker run {{.SDINC_RUST_DOCKER_OPTIONS}} {{.SDINC_RUST_LATEST}} cargo run"
   rust-all:
     desc: "run the SDLC(Software Development Life Cycle)"
-    deps: [rust-build]
+    deps: [clean, rust-build]
     cmds:
       - task --parallel rust-format rust-lint rust-test
