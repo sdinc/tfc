@@ -36,6 +36,7 @@ tasks:
     deps: [check-tools]
     cmds:
       - task --parallel checkov rust-build
+      - task --parallel rust-format rust-lint rust-test
   tf-init:
     desc: "terraform init via docker backend terraform cloud"
     cmds:
