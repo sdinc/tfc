@@ -5,6 +5,10 @@
 * docker: one way to install is with [docker desktop](https://www.docker.com/products/docker-desktop/) 
 * task: one way to install is with a ```sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin``` more details at [reference](https://taskfile.dev/installation/#get-the-binary)
 
+## CI
+
+* each push to the repo should trigger a github actions
+* I have also setup azure pipelines but you have to push to the azure hosted repo to trigger this 
 
 ## Help
 
