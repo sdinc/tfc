@@ -21,3 +21,5 @@ jobs:
         run: sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
       - name: task default
         run:  ~/.local/bin/task
+      - name: task ci
+        run: ~/.local/bin/task ci
