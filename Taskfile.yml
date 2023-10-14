@@ -140,3 +140,7 @@ tasks:
     deps: [clean, rust-build]
     cmds:
       - task --parallel rust-format rust-lint rust-test
+  snort-sh:
+    desc: "run the snort contnainer as a bash shell"
+    cmds:
+      - "docker run --name snort3 -h snort3 -u snorty -w /home/snorty -d -it ciscotalos/snort3 bash"
