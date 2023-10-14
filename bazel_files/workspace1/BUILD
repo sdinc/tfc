@@ -16,7 +16,7 @@ container_image(
 container_push(
     name = "publish",
     format = "Docker",
-    image = "sdinc_aws",
+    image = ":sdinc_aws",
     registry = "616843412874.dkr.ecr.us-east-1.amazonaws.com",
     repository = "sdinc-aws",
     tag = "0.0.1"

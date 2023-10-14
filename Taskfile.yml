@@ -113,8 +113,13 @@ tasks:
     dir: bazel_files/workspace1
     cmds:
       - bazel clean
-  bazel-sdinc_aws:
+  bazel-run-sdinc_aws:
     dir: bazel_files/workspace1
     desc: "bazel run :sdinc_aws from workspace1 directory"
     cmds:
       - "bazel run :sdinc_aws"
+  bazel-publish-sdinc_aws:
+    dir: bazel_files/workspace1
+    desc: "bazel publish :sdinc_aws from workspace1 directory"
+    cmds:
+      - "bazel run publish sdinc_aws"
