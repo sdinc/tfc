@@ -1,0 +1,15 @@
+language: python
+
+dist: jammy
+
+services:
+  - docker
+
+before_install:
+  - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+  - echo $PATH
+  - export PATH=${PATH}:~/.local/bin
+
+script:
+  - task
+  - task ci
