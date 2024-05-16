@@ -9,6 +9,9 @@ COPY --from=tf /bin/terraform /usr/local/bin/
 FROM gcr.io/google.com/cloudsdktool/google-cloud-cli:latest as google
 COPY --from=tf /bin/terraform /usr/local/bin/
 
+RUN apt-get update
+RUN apt-get install bash
+
 #https://github.com/aws/aws-cli/blob/v2/docker/Dockerfile
 #FROM public.ecr.aws/aws-cli/aws-cli:2.13.18 AS aws
 #

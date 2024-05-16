@@ -11,10 +11,10 @@ vars:
   SDINC_RUST_DOCKER_OPTIONS: "-t -v ${HOME}/.aws:/root/.aws -v ${HOME}/.azure:/root/.azure -v ${HOME}/.terraform.d:/root/.terraform.d -v $(pwd):$(pwd) -w $(pwd)/rust"
   SDINC_AZ_VERSION: "mcr.microsoft.com/azure-cli:2.51.0-arm64"
   SDINC_AZ_LATEST: "mcr.microsoft.com/azure-cli:latest"
-  SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.azure:/root/.azure  -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_AZ_DOCKER_OPTIONS: "-i -t -v ${HOME}/.ssh:/root/.ssh  -v $(pwd):/opt/work -w /opt/work"
   SDINC_AWS_VERSION: "public.ecr.aws/aws-cli/aws-cli:2.13.18"
   SDINC_AWS_LATEST: "public.ecr.aws/aws-cli/aws-cli:latest"
-  SDINC_AWS_DOCKER_OPTIONS: "-i -t -v ${HOME}/.aws:/root/.aws -v $(pwd):$(pwd) -w $(pwd)"
+  SDINC_AWS_DOCKER_OPTIONS: "-i -t -v $(pwd):/opt/work -w /opt/work"
   SDINC_LATEST: "sdinc:latest"
   SDINC_RUST_LATEST: "sdinc-rust:latest"
   SDINC_RUST_VERSION: "sdinc-rust:0.0.1"
@@ -60,7 +60,7 @@ tasks:
   sdinc-build:
     desc: "build sdinc container with bash shell"
     cmds:
-      - "docker build -t {{.SDINC_LATEST}} ."
+      - "docker build --platform linux/amd64 -t {{.SDINC_LATEST}} ."
   aws-cli:
     desc: "aws sts get-caller-identity"
     cmds:
@@ -103,7 +103,7 @@ tasks:
   sdinc-shell:
     desc: "run sdinc container as bash shell"
     cmds:
-      - 'docker run --entrypoint="/bin/bash" {{.SDINC_TF_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
+      - 'docker run --platform linux/amd64  --entrypoint="/bin/bash"  {{.SDINC_AZ_DOCKER_OPTIONS}} {{.SDINC_LATEST}} '
   check-tools:
     cmds:
       - "which docker"
