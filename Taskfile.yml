@@ -56,7 +56,7 @@ tasks:
   aws-who:
     desc: "aws sts get-caller-identity"
     cmds:
-      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_VERSION}} sts get-caller-identity"
+      - "docker run {{.SDINC_AWS_DOCKER_OPTIONS}} {{.SDINC_AWS_LATEST}} sts get-caller-identity"
   sdinc-build:
     desc: "build sdinc container with bash shell"
     cmds:
