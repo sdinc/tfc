@@ -86,7 +86,7 @@ tasks:
   checkov:
     desc: "run checkov via docker"
     cmds:
-      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}}  bridgecrew/checkov --directory $(pwd) "
+      - "docker run {{.SDINC_TF_DOCKER_OPTIONS}} bridgecrew/checkov --directory $(pwd) "
   az-login:
     desc: "auth to azure cli"
     cmds:
